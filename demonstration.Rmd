@@ -1,0 +1,141 @@
+---
+title: "Education Data Science Summit"
+author: "Ryan Estrellado"
+date: "4/20/2021"
+output: html_document
+---
+
+# What is an R Markdown Document? 
+
+The authors of **R Markdown: The Definitive Guide** write that R Markdown empowers data scientists to "interweave narratives with code in a document . . ." 
+
+Think of it as a Word document that holds not only story, but also code and graphs. 
+
+
+# Things to Watch For 
+
+Look for how writing, code, and plots appear in a single document. 
+
+Look for the parts of good dat analysis using code: 
+
+ - Identify the Question 
+ - Import the Data 
+ - Prepare the Data 
+ - Pick a method to answer the question 
+ - Visualize the data 
+ - Analyze the Data 
+ - Report the findings 
+
+
+# Load Packages 
+
+```{r load packages}
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+
+# Identify the Question 
+
+How many schools do districts have on average? 
+
+
+# Import Data 
+
+Before you work with data in R, you have to import the data. 
+
+You can get this data from the [California Department of Education's website](https://www.cde.ca.gov/ds/sd/sd/filesenr.asp): 
+
+```{r import data}
+enroll <- read_tsv(here::here("19-20-enrollment.txt"))
+```
+
+Here's one way working in R is different from working in a spreadsheet: you aren't dragging and dropping things around in a spreadsheet. Instead, you're using code to submit instructions to R. Sometimes you just want to see the dataset. Here's a way to do that: 
+
+```{r view data}
+# See the data using View()
+View(enroll)
+```
+
+Question: Let's look at a few variables. Do these variables contain unique values? In other words, does Castle Rock school appear only once? 
+
+
+# Prepare Data 
+
+Most publicly available datasets aren't prepared for the analysis you want to do. You have to prepare the dataset before you work with it. 
+
+ - We want the average number of schools in a district. 
+ - To get that, we need to be able to count the number of schools in each district. 
+ - And to do that, we need each school in each district to only appear once. 
+ - Last, we only want districts in San Diego county
+
+```{r san diego districts and schools}
+sd <- enroll %>% 
+  filter(COUNTY == "San Diego") %>% 
+  distinct(DISTRICT, SCHOOL) # Each school should only appear once 
+
+View(sd)
+```
+
+Question: How many schools does the Alpine district have? 
+
+Count the schools in each district: 
+
+```{r number of schools per district}
+school_count <- sd %>% 
+  count(DISTRICT, sort = TRUE)
+
+school_count
+```
+
+
+# Pick a Method to Answer the Question 
+
+Compute the average number of schools in a district. Compute the standard deviation of the number of schools in a district. 
+
+
+# Visualize Data 
+
+Make the dataset easier to visualize by filtering for the top ten: 
+
+```{r top ten}
+top_10 <- school_count %>% 
+  filter(min_rank(desc(n)) < 10) 
+
+top_10
+```
+
+Visualize the top ten districts by number of schools. As I do this, watch how I talk and build the visualization layer by layer based on what I want to see. 
+
+```{r plot number of schools}
+ggplot(data = top_10, aes(x = reorder(DISTRICT, n), y = n)) +
+  geom_bar(stat = "identity") +
+  coord_flip() + 
+  labs(title = "Districts With the Most Schools", 
+       x = "", 
+       y = "Number of Schools")
+```
+
+
+# Analyze the Data 
+
+Refresh our memory of the dataset: 
+
+```{r view dataset again}
+View(school_count)
+```
+
+. . . and let's compute the mean and standard deviation. 
+
+```{r find mean}
+school_count %>%
+  summarise(avg_schools = mean(n), standard_dev = sd(n), median_schools = median(n))
+```
+
+
+# Report Your Findings
+
+Districts in San Diego have about 16 schools in them, on average. 
+
+We should interpret this with caution, because there's a lot of variation in school counts in San Diego County. San Diego Unified has far and away the highest school count at 223 schools—almost. For the more statistics savvy, that's 7 times the standard deviation—a very large difference from the county average.
