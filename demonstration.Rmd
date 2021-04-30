@@ -1,9 +1,18 @@
 ---
 title: "Education Data Science Summit"
 author: "Ryan Estrellado"
-date: "4/20/2021"
-output: html_document
+date: "4/30/2021"
+output:
+  pdf_document: default
+  html_document: default
 ---
+
+This document is meant to accompany my talk at the Education Data Science Summit. It uses publicly available data. I hope it helps you! 
+
+Ryan Estrellado  
+
+[linktr.ee/ry_estrellado](https://linktr.ee/ry_estrellado)
+
 
 # What is an R Markdown Document? 
 
@@ -53,11 +62,13 @@ You can get this data from the [California Department of Education's website](ht
 enroll <- read_tsv(here::here("19-20-enrollment.txt"))
 ```
 
-Here's one way working in R is different from working in a spreadsheet: you aren't dragging and dropping things around in a spreadsheet. Instead, you're using code to submit instructions to R. Sometimes you just want to see the dataset. Here's a way to do that: 
+Here's one way working in R is different from working in a spreadsheet: you aren't dragging and dropping things around in a spreadsheet. Instead, you're using code to submit instructions to R. 
+
+Sometimes you just want to see the dataset. Here's a way to do that: 
 
 ```{r view data}
 # See the data using View()
-View(enroll)
+# View(enroll)
 ```
 
 Question: Let's look at a few variables. Do these variables contain unique values? In other words, does Castle Rock school appear only once? 
@@ -67,9 +78,9 @@ Question: Let's look at a few variables. Do these variables contain unique value
 
 Most publicly available datasets aren't prepared for the analysis you want to do. You have to prepare the dataset before you work with it. 
 
- - We want the average number of schools in a district. 
- - To get that, we need to be able to count the number of schools in each district. 
- - And to do that, we need each school in each district to only appear once. 
+ - We want the average number of schools in a district 
+ - To get that, we need to be able to count the number of schools in each district 
+ - And to do that, we need each school in each district to only appear once 
  - Last, we only want districts in San Diego county
 
 ```{r san diego districts and schools}
@@ -77,7 +88,7 @@ sd <- enroll %>%
   filter(COUNTY == "San Diego") %>% 
   distinct(DISTRICT, SCHOOL) # Each school should only appear once 
 
-View(sd)
+#View(sd)
 ```
 
 Question: How many schools does the Alpine district have? 
@@ -110,7 +121,7 @@ top_10
 
 Visualize the top ten districts by number of schools. As I do this, watch how I talk and build the visualization layer by layer based on what I want to see. 
 
-```{r plot number of schools}
+```{r plot number of schools, fig.align='center'}
 ggplot(data = top_10, aes(x = reorder(DISTRICT, n), y = n)) +
   geom_bar(stat = "identity") +
   coord_flip() + 
@@ -125,7 +136,7 @@ ggplot(data = top_10, aes(x = reorder(DISTRICT, n), y = n)) +
 Refresh our memory of the dataset: 
 
 ```{r view dataset again}
-View(school_count)
+#View(school_count)
 ```
 
 . . . and let's compute the mean and standard deviation. 

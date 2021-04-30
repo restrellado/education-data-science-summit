@@ -1,9 +1,18 @@
 ---
 title: "Education Data Science Summit"
 author: "Ryan Estrellado"
-date: "4/20/2021"
-output: html_document
+date: "4/30/2021"
+output:
+  pdf_document: default
+  html_document: default
 ---
+
+This document is meant to accompany my talk at the Education Data Science Summit. It uses publicly available data. I hope it helps you! 
+
+Ryan Estrellado  
+
+[linktr.ee/ry_estrellado](https://linktr.ee/ry_estrellado)
+
 
 # What is an R Markdown Document? 
 
@@ -16,7 +25,7 @@ Think of it as a Word document that holds not only story, but also code and grap
 
 Look for how writing, code, and plots appear in a single document. 
 
-Look for the parts of good dat analysis using code: 
+Look for the parts of good data analysis using code: 
 
  - Identify the Question 
  - Import the Data 
@@ -28,6 +37,8 @@ Look for the parts of good dat analysis using code:
 
 
 # Load Packages 
+
+Packages are add-ons to R that are built by software developers and communit members. They extend the capability of base R. 
 
 ```{r load packages}
 library(tidyverse)
@@ -51,10 +62,11 @@ You can get this data from the [California Department of Education's website](ht
 
 ```
 
-Here's one way working in R is different from working in a spreadsheet: you aren't dragging and dropping things around in a spreadsheet. Instead, you're using code to submit instructions to R. Sometimes you just want to see the dataset. Here's a way to do that: 
+Here's one way working in R is different from working in a spreadsheet: you aren't dragging and dropping things around in a spreadsheet. Instead, you're using code to submit instructions to R. 
+
+Sometimes you just want to see the dataset. Here's a way to do that: 
 
 ```{r view data}
-# See the data using View()
 
 ```
 
@@ -65,9 +77,9 @@ Question: Let's look at a few variables. Do these variables contain unique value
 
 Most publicly available datasets aren't prepared for the analysis you want to do. You have to prepare the dataset before you work with it. 
 
- - We want the average number of schools in a district. 
- - To get that, we need to be able to count the number of schools in each district. 
- - And to do that, we need each school in each district to only appear once. 
+ - We want the average number of schools in a district 
+ - To get that, we need to be able to count the number of schools in each district 
+ - And to do that, we need each school in each district to only appear once 
  - Last, we only want districts in San Diego county
 
 ```{r san diego districts and schools}
@@ -98,7 +110,7 @@ Make the dataset easier to visualize by filtering for the top ten:
 
 Visualize the top ten districts by number of schools. As I do this, watch how I talk and build the visualization layer by layer based on what I want to see. 
 
-```{r plot number of schools}
+```{r plot number of schools, fig.align='center'}
 
 ```
 
