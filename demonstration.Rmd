@@ -16,7 +16,7 @@ Think of it as a Word document that holds not only story, but also code and grap
 
 Look for how writing, code, and plots appear in a single document. 
 
-Look for the parts of good dat analysis using code: 
+Look for the parts of good data analysis using code: 
 
  - Identify the Question 
  - Import the Data 
@@ -28,6 +28,8 @@ Look for the parts of good dat analysis using code:
 
 
 # Load Packages 
+
+Packages are add-ons to R that are built by software developers and communit members. They extend the capability of base R. 
 
 ```{r load packages}
 library(tidyverse)
