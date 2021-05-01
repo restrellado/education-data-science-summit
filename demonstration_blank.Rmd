@@ -134,4 +134,4 @@ Refresh our memory of the dataset:
 
 Districts in San Diego have about 16 schools in them, on average. 
 
-We should interpret this with caution, because there's a lot of variation in school counts in San Diego County. San Diego Unified has far and away the highest school count at 223 schools—almost. For the more statistics savvy, that's 7 times the standard deviation—a very large difference from the county average.
+We should interpret this with caution, because there's a lot of variation in school counts in San Diego County. San Diego Unified has far and away the highest school count at 223 schools. For the more statistics savvy, that's 7 times the standard deviation—a very large difference from the county average.
