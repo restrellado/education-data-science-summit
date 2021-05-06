@@ -43,13 +43,12 @@ Packages are add-ons to R that are built by software developers and communit mem
 ```{r load packages}
 library(tidyverse)
 library(here)
-library(janitor)
 ```
 
 
 # Identify the Question 
 
-How many schools do districts have on average? 
+How many schools do districts in San Diego have on average? 
 
 
 # Import Data 
@@ -86,13 +85,13 @@ Most publicly available datasets aren't prepared for the analysis you want to do
 
 ```
 
-Question: How many schools does the Alpine district have? 
-
 Count the schools in each district: 
 
 ```{r number of schools per district}
 
 ```
+
+Test: How many schools does Alpine have? 
 
 
 # Pick a Method to Answer the Question 
